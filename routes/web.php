@@ -45,8 +45,9 @@ Route::prefix('/admin')->group(function(){
             return view('taklif.admin.products.view',compact('prods'));
         });
         Route::get('/update/{prod_id}',function($prod_id){
-            $prods=DB::table('products')->where('id',$prod_id)->get();
-            return view('taklif.admin.products.update',compact('prods'));
+            $prod=DB::table('products')->where('id',$prod_id)->first();
+            $category=DB::table('categories')->where('id',$prod->category_id)->first();
+            return view('taklif.admin.products.update',compact('prod','category'));
         });
         Route::get('/create',function(){
             return view('taklif.admin.products.create');

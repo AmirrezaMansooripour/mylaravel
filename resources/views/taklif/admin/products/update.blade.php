@@ -1,42 +1,42 @@
-@extends('taklif.layout.maste')
+@extends('taklif.layout.master')
 @section('body')
-<div class="container">
-<form action="/home" method="GET" style="margin-top:13px">
-                    <div class="form-group">
-                        <label style="margin-left: 280px" for="user">نام کاربری:</label>
-                        <input type="username" name="user" class="form-control"
-                            placeholder="نام کاربری خود را وارد کنید" id="user">
-                    </div>
-                    <div class="form-group">
-                        <label for="email" style="margin-left: 310px">ایمیل:</label>
-                        <input type="email" name="email" class="form-control" placeholder="ایمیل خود را وارد کنید"
-                            id="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone" style="margin-left: 257.3px">شماره موبایل:</label>
-                        <input type="number" name="phone" class="form-control"
-                            placeholder="شماره موبایل خود را وارد کنید" id="phone">
-                    </div>
-                    <div class="form-group">
-                        <label for="password" style="margin-left: 285px">رمز عبور :</label>
-                        <input type="password" name="pass" class="form-control"
-                            placeholder="شماره موبایل خود را وارد کنید" id="pass">
-                    </div>
-                    <div class="form-group">
-                        <label for="password" style="margin-left: 255.6px"> تکرار رمز عبور:</label>
-                        <input type="password" name="pass" class="form-control"
-                            placeholder="شماره موبایل خود را وارد کنید" id="pass">
-                    </div>
-                    <div class="form-group form-check" style="text-align: right">
-                        <label class="form-check-label">
-                            <input class="form-check-input" name="a" style="margin-right: 110px" type="checkbox">
-                            من را به
-                            یاد
-                            بیاور
-                        </label>
-                        <br>
-                        <br>
-                        <button type="submit" class="btn btn-primary btn-block">ثبت نام</button>
-                </form>
-</div>
+    <div class="container">
+        <form action="/home" method="GET" style="margin-top:13px;width: 32%;margin: auto">
+            <div class="form-group">
+                <label for="prod_name">Product Name:</label>
+                <input type="username" value="{{ $prod->name }}" name="prod_name" class="form-control"
+                    placeholder="Product Name" id="prod_name">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" class="form-control" name="description" rows="3">{{ $prod->description }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Price:</label>
+                <input type="email" name="email" class="form-control" placeholder="Price" id="email"
+                    value="{{ $prod->price }}">
+            </div>
+
+            <div class="form-group">
+                <label for="off">off:</label>
+                <input type="number" name="off" class="form-control" value="{{ $prod->off }}" placeholder="off"
+                    id="off">
+            </div>
+
+            <div class="form-group">
+                <label for="Image">image:</label>
+                <input type="file" name="Image" value="{{ $prod->image }}" class="form-control" placeholder="Image"
+                    id="Image">
+            </div>
+            <div class="form-group">
+                <label for="cat">Category:</label>
+                <input type="text" name="cat" value="{{ $category->name }}" class="form-control"
+                    placeholder="Category" id="cat">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Save</button>
+        </form>
+    </div>
 @endsection
