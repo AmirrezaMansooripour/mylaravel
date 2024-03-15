@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'titr';
+    src: url("{{asset('font/titr.ttf')}}")
+    format('truetype');
+
+}
+.titr{
+    font-family: 'titr';
+}
+.matn{
+    font-family: 'titr'
+}
