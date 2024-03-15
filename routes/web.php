@@ -13,49 +13,67 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Route Tamrin
-Route::get('/cats',function(){
-    $cats=DB::table('categories')->get();
-    return view('taklif.cats',compact('cats'));
+Route::get('/cats', function () {
+    $cats = DB::table('categories')->get();
+    return view('taklif.cats', compact('cats'));
 });
-Route::get('/prods',function(){
-    $prods=DB::table('products')->get();
-    return view('taklif.prods',compact('prods'));
-});
-
-
-Route::get('/prods/new',function(){
-    $prods=DB::table('products')->orderBy('id','DESC')->get();
-    return view('taklif.prods',compact('prods'));
+Route::get('/prods', function () {
+    $prods = DB::table('products')->get();
+    return view('taklif.prods', compact('prods'));
 });
 
-Route::get('/prods/{cat_id}',function($cat_id){
-    $prods=DB::table('products')->where('category_id',$cat_id)->get();
-    return view('taklif.prods',compact('prods'));
+
+Route::get('/prods/new', function () {
+    $prods = DB::table('products')->orderBy('id', 'DESC')->get();
+    return view('taklif.prods', compact('prods'));
 });
 
-Route::get('/prod/{prod_id}',function($prod_id){
-    $prod=DB::table('products')->where('id',$prod_id)->first();
-    return view('taklif.prod',compact('prod'));
+//Products Category x
+Route::get('/prods/{cat_id}', function ($cat_id) {
+    $prods = DB::table('products')->where('category_id', $cat_id)->get();
+    return view('taklif.prods', compact('prods'));
 });
 
-Route::prefix('/admin')->group(function(){
-    Route::prefix('/products')->group(function(){
-        Route::get('/',function(){
-            $prods=DB::table('products')->get();
-            return view('taklif.admin.products.view',compact('prods'));
+//Details Products
+Route::get('/prod/{prod_id}', function ($prod_id) {
+    $prod = DB::table('products')->where('id', $prod_id)->first();
+    return view('taklif.prod', compact('prod'));
+});
+
+//Manage Products&Categories
+Route::prefix('/admin')->group(function () {
+    Route::prefix('/products')->group(function () {
+        Route::get('/', function () {
+            $prods = DB::table('products')->get();
+            return view('taklif.admin.products.view', compact('prods'));
         });
-        Route::get('/update/{prod_id}',function($prod_id){
-            $prod=DB::table('products')->where('id',$prod_id)->first();
-            $category=DB::table('categories')->where('id',$prod->category_id)->first();
-            return view('taklif.admin.products.update',compact('prod','category'));
+        Route::get('/update/{prod_id}', function ($prod_id) {
+            $prod = DB::table('products')->where('id', $prod_id)->first();
+            $category = DB::table('categories')->where('id', $prod->category_id)->first();
+            return view('taklif.admin.products.update', compact('prod', 'category'));
         });
-        Route::get('/create',function(){
+        Route::get('/create', function () {
             return view('taklif.admin.products.create');
         });
+        Route::get('/delete', function () {
+            return view('taklif.admin.products.delete');
+        });
     });
-    Route::get('/categories',function(){
-        $cats=DB::table('categories')->get();
-        return view('taklif.admin.categories',compact('cats'));
+    Route::prefix('/categories')->group(function () {
+        Route::get('/', function () {
+            $cats = DB::table('categories')->get();
+            return view('taklif.admin.categories.view', compact('cats'));
+        });
+        Route::get('/update/{cat_id}', function ($cat_id) {
+            $cat = DB::table('categories')->where('id', $cat_id)->first();
+            return view('taklif.admin.categories.update', compact('cat'));
+        });
+        Route::get('/create', function () {
+            return view('taklif.admin.categories.create', compact('cats'));
+        });
+        Route::get('/delete', function () {
+            return view('taklif.admin.categories.delete', compact('cats'));
+        });
     });
 });
 

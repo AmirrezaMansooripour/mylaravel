@@ -26,7 +26,7 @@
       <tr>
         <td><h6>{{$cat->id}}</h6></td>
         <td><h6>{{$cat->name}}</h6></td>
-        <td><button class="btn btn-info"><h6>Change</h6></button></td>
+        <td><a href="/admin/categories/update/{{$cat->id}}"><button class="btn btn-info"><h6>Change</h6></button></a></td>
         <td><button class="btn btn-danger"><h6>Delete</h6></button></td>
       </tr>
         @endforeach
